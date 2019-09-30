@@ -17,4 +17,9 @@
     <string name="login">Login</string>
     <string name="name">Name:</string>
     <string name="password">Password:</string>
+    <string name="friend_requests">Friend Requests:</string>
+    <string name="john_smith">John Smith</string>
+    <string name="notifications">Notifications:</string>
+    <string name="job_list">Job List:</string>
+    <string name="example_job_casual">Example Job - Casual</string>
 </resources>
