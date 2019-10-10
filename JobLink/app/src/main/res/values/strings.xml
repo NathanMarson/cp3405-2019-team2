@@ -22,4 +22,10 @@
     <string name="notifications">Notifications:</string>
     <string name="job_list">Job List:</string>
     <string name="example_job_casual">Example Job - Casual</string>
+    <string name="studies_at_jcu">Studies at JCU</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="example_phone_number">0412 345 678</string>
+    <string name="example_email_address">example@gmail.com</string>
+    <string name="example">Example</string>
+    <string name="menu_profile">Profile</string>
 </resources>
