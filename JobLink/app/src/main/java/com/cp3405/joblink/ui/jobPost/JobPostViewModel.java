@@ -1,17 +1,16 @@
-package com.cp3405.joblink.ui.login;
+package com.cp3405.joblink.ui.jobPost;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class LoginViewModel extends ViewModel {
+public class JobPostViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public LoginViewModel() {
+    public JobPostViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Please Login");
-
+        mText.setValue("Post a Job");
     }
 
     public LiveData<String> getText() {
