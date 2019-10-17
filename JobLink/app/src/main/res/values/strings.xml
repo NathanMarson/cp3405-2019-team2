@@ -22,4 +22,13 @@
     <string name="notifications">Notifications:</string>
     <string name="job_list">Job List:</string>
     <string name="example_job_casual">Example Job - Casual</string>
+    <string name="job_post">Job Post</string>
+    <string name="post_a_job">Post A Job</string>
+    <string name="job_title">Job Title:</string>
+    <string name="job_description">Job Description:</string>
+    <string name="start_date">Start Date</string>
+    <string name="apply_by">Apply By:</string>
+    <string name="contact">Contact:</string>
+    <string name="employer">Employer:</string>
+    <string name="post_job">Post Job</string>
 </resources>
