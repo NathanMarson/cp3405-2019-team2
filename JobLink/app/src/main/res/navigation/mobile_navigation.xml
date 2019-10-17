@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.cp3405.joblink.ui.profile.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
         android:id="@+id/nav_gallery"
         android:name="com.cp3405.joblink.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
@@ -46,4 +52,11 @@
         android:name="com.cp3405.joblink.ui.login.LoginFragment"
         android:label="@string/menu_login"
         tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/nav_jobpost"
+        android:name="com.cp3405.joblink.ui.jobPost.JobPostFragment"
+        android:label="Job Post"
+        tools:layout="@layout/fragment_jobpost" />
+
 </navigation>

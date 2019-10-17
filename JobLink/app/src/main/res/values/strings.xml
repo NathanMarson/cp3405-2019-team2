@@ -17,4 +17,24 @@
     <string name="login">Login</string>
     <string name="name">Name:</string>
     <string name="password">Password:</string>
+    <string name="friend_requests">Friend Requests:</string>
+    <string name="john_smith">John Smith</string>
+    <string name="notifications">Notifications:</string>
+    <string name="job_list">Job List:</string>
+    <string name="example_job_casual">Example Job - Casual</string>
+    <string name="studies_at_jcu">Studies at JCU</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="example_phone_number">0412 345 678</string>
+    <string name="example_email_address">example@gmail.com</string>
+    <string name="example">Example</string>
+    <string name="menu_profile">Profile</string>
+    <string name="job_post">Job Post</string>
+    <string name="post_a_job">Post A Job</string>
+    <string name="job_title">Job Title:</string>
+    <string name="job_description">Job Description:</string>
+    <string name="start_date">Start Date</string>
+    <string name="apply_by">Apply By:</string>
+    <string name="contact">Contact:</string>
+    <string name="employer">Employer:</string>
+    <string name="post_job">Post Job</string>
 </resources>

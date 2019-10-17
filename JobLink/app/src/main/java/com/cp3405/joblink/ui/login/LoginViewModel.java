@@ -20,6 +20,7 @@ public class LoginViewModel extends ViewModel {
 
         mText = new MutableLiveData<>();
         mText.setValue("Please Login");
+
     }
 
     public LiveData<String> getText() {
