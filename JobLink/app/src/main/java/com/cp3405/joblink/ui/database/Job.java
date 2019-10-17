@@ -4,9 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "jobs")
+@Entity(tableName = "jobs", indices = {@Index(value = "job_title", unique = true)})
 public class Job {
 
 //    @NonNull
@@ -14,9 +15,9 @@ public class Job {
 //        return jobID;
 //    }
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
-    public String jobID;
+    public int jobID;
 
     @NonNull
     @ColumnInfo(name = "job_title")
@@ -28,10 +29,9 @@ public class Job {
     @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "employer_ID")
     @NonNull
     @ColumnInfo(name = "employer_ID")
-    public String employerID;
+    public int employerID;
 
-    public Job(String jobID, String jobTitle, String description, String employerID) {
-        this.jobID = jobID;
+    public Job(String jobTitle, String description, int employerID) {
         this.jobTitle = jobTitle;
         this.description = description;
         this.employerID = employerID;

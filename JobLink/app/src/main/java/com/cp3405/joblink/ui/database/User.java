@@ -3,9 +3,10 @@ package com.cp3405.joblink.ui.database;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "users")
+@Entity(tableName = "users", indices = {@Index(value = "email", unique = true)})
 public class User {
 
 //    @NonNull
@@ -28,9 +29,9 @@ public class User {
 //        return this.userType;
 //    }
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
-    public String id;
+    public int id;
 
     @NonNull
     @ColumnInfo(name = "first_name")
@@ -54,9 +55,8 @@ public class User {
     @ColumnInfo(name = "image")
     public String image;
 
-    public User(String id, String firstName, String lastName, String userType, String email,
+    public User(String firstName, String lastName, String userType, String email,
                 String password, int phoneNum, String image) {
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userType = userType;

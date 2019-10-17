@@ -11,13 +11,13 @@ import androidx.lifecycle.LiveData;
 public class UserViewModel extends AndroidViewModel {
 
     private UserDao userDao;
-    private LiveData<List<User>> usersLiveData;
+    private List<User> usersLiveData;
     public UserViewModel(@NonNull Application application) {
         super(application);
         userDao = JobLinkRoomDatabase.getDatabase(application).userDao();
         usersLiveData = userDao.getAllUsers();
     }
-    public LiveData<List<User>> getUserList() {
+    public List<User> getUserList() {
         return usersLiveData;
     }
     public void insert(User... users) {

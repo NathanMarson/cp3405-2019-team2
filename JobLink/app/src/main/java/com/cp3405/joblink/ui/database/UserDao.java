@@ -34,5 +34,8 @@ public interface UserDao {
     void deleteAll();
 
     @Query("SELECT * FROM users ORDER BY first_name ASC")
-    LiveData<List<User>> getAllUsers();
+    List<User> getAllUsers();
+
+//    @Query("SELECT COUNT(DISTINCT `table_name`) FROM `information_schema`.`columns` WHERE `table_schema` = 'your_db_name'")
+//    int isNull();
 }

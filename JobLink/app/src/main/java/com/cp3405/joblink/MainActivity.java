@@ -1,13 +1,22 @@
 package com.cp3405.joblink;
 
+import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 
+import com.cp3405.joblink.ui.database.Job;
+import com.cp3405.joblink.ui.database.JobDao;
+import com.cp3405.joblink.ui.database.JobLinkRoomDatabase;
 import com.cp3405.joblink.ui.database.JobViewModel;
+import com.cp3405.joblink.ui.database.User;
+import com.cp3405.joblink.ui.database.UserDao;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -20,17 +29,26 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.room.DatabaseConfiguration;
+import androidx.room.InvalidationTracker;
+import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import android.view.Menu;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private JobViewModel jobViewModel;
+    private Context context;
+    private Application application;
+    JobLinkRoomDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getApplicationContext();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -57,7 +75,102 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         jobViewModel = ViewModelProviders.of(this).get(JobViewModel.class);
+
+//        database = new JobLinkRoomDatabase() {
+//            @Override
+//            public UserDao userDao() {
+//                return null;
+//            }
+//
+//            @Override
+//            public JobDao jobDao() {
+//                return null;
+//            }
+//
+//            @NonNull
+//            @Override
+//            protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration config) {
+//                return null;
+//            }
+//
+//            @NonNull
+//            @Override
+//            protected InvalidationTracker createInvalidationTracker() {
+//                return null;
+//            }
+//
+//            @Override
+//            public void clearAllTables() {
+//                clearDb();
+//            }
+//        };
+
+//        System.out.println(database.userDao().isNull());
+
+        UserDao userDao = JobLinkRoomDatabase.getDatabase(context).userDao();
+        JobDao jobDao = JobLinkRoomDatabase.getDatabase(context).jobDao();
+//
+////        userDao.deleteAll();
+//
+//        System.out.println(userDao.getAllUsers());
+        List<User> users = userDao.getAllUsers();
+        List<Job> jobs = jobDao.getAllJobs();
+        for(User user:users) {
+            System.out.println(user.firstName);
+        }
+//
+//        User studentUser = new User("Student", "Default", "Student",
+//                "student@student.com", "student", 7883368, "image");
+//
+//        userDao.insert(studentUser);
+////        User test = userDao.findUserByName("Student");
+////        System.out.println(test.firstName);
+//
+//        User staffUser = new User("Staff", "Default", "Staff",
+//                "staff@staff.com", "staff", 78233, "image");
+//
+//        userDao.insert(staffUser);
+//        userDao.findUserByName("Staff");
+//
+//        User employerUser = new User("Employer", "Default", "Employer",
+//                "employer@employer.com", "employer", 3675637, "image");
+//
+//        userDao.insert(employerUser);
+//        userDao.findUserByName("Employer");
+//
+//        System.out.println(userDao.getAllUsers());
+//        users = userDao.getAllUsers();
+//        for(User user:users) {
+//            System.out.println(user.firstName);
+//        }
+//        int size = users.size();
+//
+//        Job jobDefault = new Job("Default Title", "Default Description",
+//                userDao.findUserByName("Employer").id);
+//        jobDao.insert(jobDefault);
+//
+//        System.out.println(jobDao.getAllJobs());
+//        jobs = jobDao.getAllJobs();
+        for(Job job:jobs) {
+            System.out.println(job.jobTitle);
+        }
+//
+////        database.clearDb();
+//        userDao.deleteAll();
+//        jobDao.deleteAll();
+//
+//        System.out.println(userDao.getAllUsers());
+//        users = userDao.getAllUsers();
+//        for(User user:users) {
+//            System.out.println(user.firstName);
+//        }
     }
+
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        this.context = context;
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

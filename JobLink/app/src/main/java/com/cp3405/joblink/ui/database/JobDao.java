@@ -34,6 +34,6 @@ public interface JobDao {
     void deleteAll();
 
     @Query("SELECT * FROM jobs ORDER BY job_title ASC")
-    LiveData<List<Job>> getAllJobs();
+    List<Job> getAllJobs();
 
 }
