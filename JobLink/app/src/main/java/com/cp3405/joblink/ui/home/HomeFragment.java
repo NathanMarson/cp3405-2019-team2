@@ -6,15 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.cp3405.joblink.R;
+import com.cp3405.joblink.ui.database.Job;
+import com.cp3405.joblink.ui.database.JobDao;
+import com.cp3405.joblink.ui.database.JobLinkRoomDatabase;
+import com.cp3405.joblink.ui.database.User;
 import com.cp3405.joblink.ui.gallery.GalleryFragment;
 import com.cp3405.joblink.ui.jobPost.JobPostFragment;
 import com.cp3405.joblink.ui.jobPost.JobPostViewModel;
+
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
@@ -52,6 +59,18 @@ public class HomeFragment extends Fragment {
 
         final JobPostFragment post = new JobPostFragment();
         final FragmentManager manager = getFragmentManager();
+
+        TextView notification = root.findViewById(R.id.home_notifications);
+        JobDao jobDao = JobLinkRoomDatabase.getDatabase(getContext()).jobDao();
+        List<Job> jobs = jobDao.getAllJobs();
+
+        for(Job job:jobs) {
+
+            String text = "New Job Listing: " + job.jobTitle + "\nJob Description: " + job.description;
+            notification.setText(text);
+            //TODO: Integrate employee ID
+        }
+
 
 
 
