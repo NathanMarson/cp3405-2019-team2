@@ -15,8 +15,6 @@ import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -29,12 +27,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.room.DatabaseConfiguration;
-import androidx.room.InvalidationTracker;
-import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import android.view.Menu;
-import android.widget.Button;
 
 import java.util.List;
 
@@ -122,37 +116,37 @@ public class MainActivity extends AppCompatActivity {
         List<User> users = userDao.getAllUsers();
         List<Job> jobs = jobDao.getAllJobs();
         for(User user:users) {
-            System.out.println(user.firstName);
+            System.out.println(user.username);
         }
 //
 //        User studentUser = new User("Student", "Default", "Student",
 //                "student@student.com", "student", 7883368, "image");
 //
 //        userDao.insert(studentUser);
-////        User test = userDao.findUserByName("Student");
-////        System.out.println(test.firstName);
+////        User test = userDao.findUserByUsername("Student");
+////        System.out.println(test.username);
 //
 //        User staffUser = new User("Staff", "Default", "Staff",
 //                "staff@staff.com", "staff", 78233, "image");
 //
 //        userDao.insert(staffUser);
-//        userDao.findUserByName("Staff");
+//        userDao.findUserByUsername("Staff");
 //
 //        User employerUser = new User("Employer", "Default", "Employer",
 //                "employer@employer.com", "employer", 3675637, "image");
 //
 //        userDao.insert(employerUser);
-//        userDao.findUserByName("Employer");
+//        userDao.findUserByUsername("Employer");
 //
 //        System.out.println(userDao.getAllUsers());
 //        users = userDao.getAllUsers();
 //        for(User user:users) {
-//            System.out.println(user.firstName);
+//            System.out.println(user.username);
 //        }
 //        int size = users.size();
 //
 //        Job jobDefault = new Job("Default Title", "Default Description",
-//                userDao.findUserByName("Employer").id);
+//                userDao.findUserByUsername("Employer").id);
 //        jobDao.insert(jobDefault);
 //
 //        System.out.println(jobDao.getAllJobs());
@@ -168,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
 //        System.out.println(userDao.getAllUsers());
 //        users = userDao.getAllUsers();
 //        for(User user:users) {
-//            System.out.println(user.firstName);
+//            System.out.println(user.username);
 //        }
     }
 

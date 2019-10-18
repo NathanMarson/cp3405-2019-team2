@@ -18,8 +18,11 @@ public interface UserDao {
 //    @Insert
 //    void insert(User user);
 
-    @Query("SELECT * FROM users WHERE first_name = :firstName LIMIT 1")
-    User findUserByName(String firstName);
+    @Query("SELECT * FROM users WHERE username = :firstName LIMIT 1")
+    User findUserByUsername(String firstName);
+
+    @Query("SELECT * FROM users WHERE is_logged_in = 1 LIMIT 1")
+    User findUserByLogin();
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     long insert(User users);
@@ -28,12 +31,12 @@ public interface UserDao {
     void insert(User... users);
 
     @Update(onConflict = OnConflictStrategy.IGNORE)
-    void update(User users);
+    void update(User... users);
 
     @Query("DELETE FROM users")
     void deleteAll();
 
-    @Query("SELECT * FROM users ORDER BY first_name ASC")
+    @Query("SELECT * FROM users ORDER BY username ASC")
     List<User> getAllUsers();
 
 //    @Query("SELECT COUNT(DISTINCT `table_name`) FROM `information_schema`.`columns` WHERE `table_schema` = 'your_db_name'")

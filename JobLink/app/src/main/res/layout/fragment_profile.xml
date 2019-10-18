@@ -19,7 +19,7 @@
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="45dp"
-            android:src="@raw/ivan"
+            android:src="@drawable/ic_person_white_24dp"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -116,5 +116,15 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
+    <Button
+        android:id="@+id/profile_save_changes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="35dp"
+        android:text="@string/save_changes"
+        android:background="@color/colorPrimaryDark"
+        android:padding="10dp"
+        android:textColor="@color/white" />
 
 </LinearLayout>
