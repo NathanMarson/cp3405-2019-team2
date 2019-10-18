@@ -68,7 +68,8 @@ public class JobPostFragment extends Fragment {
                         .setAction("Action", null).show();
                 manager.beginTransaction().replace(R.id.nav_host_fragment, home,
                         home.getTag()).commit();
-                Job example = new Job(jobTitle.getText().toString(), jobDes.getText().toString(), userDao.findUserByName("Employer").id);
+                Job example = new Job(jobTitle.getText().toString(), jobDes.getText().toString(),
+                        userDao.findUserByUsername("Employer").id);
 
                 jobDao.insert(example);
             }

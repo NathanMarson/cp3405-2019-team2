@@ -22,7 +22,7 @@ public abstract class JobLinkRoomDatabase extends RoomDatabase {
 //    private static volatile JobLinkRoomDatabase jobLinkRoomDatabase;
 
     public static JobLinkRoomDatabase getDatabase(final Context context) {
-        // context.deleteDatabase(DB_NAME); // Reset Database //
+//        context.deleteDatabase(DB_NAME); // Reset Database //
         if (jobLinkRoomDatabase == null) {
             synchronized (JobLinkRoomDatabase.class) {
                 if (jobLinkRoomDatabase == null) {
