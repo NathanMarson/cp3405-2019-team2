@@ -19,6 +19,7 @@ import com.cp3405.joblink.R;
 import com.cp3405.joblink.ui.database.Job;
 import com.cp3405.joblink.ui.database.JobDao;
 import com.cp3405.joblink.ui.database.JobLinkRoomDatabase;
+import com.cp3405.joblink.ui.database.UserDao;
 import com.cp3405.joblink.ui.home.HomeFragment;
 import com.cp3405.joblink.ui.jobPost.JobPostViewModel;
 import com.google.android.material.snackbar.Snackbar;
@@ -46,10 +47,13 @@ public class JobPostFragment extends Fragment {
         final FragmentManager manager = getFragmentManager();
 
         final JobDao jobDao = JobLinkRoomDatabase.getDatabase(getContext()).jobDao();
+        final UserDao userDao = JobLinkRoomDatabase.getDatabase(getContext()).userDao();
+
+
 
         final EditText jobTitle = root.findViewById(R.id.text_job_post_name);
         final EditText jobDes = root.findViewById(R.id.text_job_post_description);
-        final EditText jobID = root.findViewById(R.id.text_job_post_employer);
+        
 
 
 
@@ -64,7 +68,7 @@ public class JobPostFragment extends Fragment {
                         .setAction("Action", null).show();
                 manager.beginTransaction().replace(R.id.nav_host_fragment, home,
                         home.getTag()).commit();
-                Job example = new Job(jobTitle.getText().toString(), jobDes.getText().toString(), 4);
+                Job example = new Job(jobTitle.getText().toString(), jobDes.getText().toString(), userDao.findUserByName("Employer").id);
 
                 jobDao.insert(example);
             }

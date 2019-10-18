@@ -78,27 +78,7 @@
             tools:ignore="LabelFor"
             tools:targetApi="o" />
 
-        <TextView
-            android:id="@+id/job_post_employer"
-            android:text="@string/employer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/text_job_post_employer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:inputType="textPersonName"
-            android:autofillHints=""
-            tools:ignore="LabelFor"
-            tools:targetApi="o" />
 
         <Button
             android:id="@+id/postButton"

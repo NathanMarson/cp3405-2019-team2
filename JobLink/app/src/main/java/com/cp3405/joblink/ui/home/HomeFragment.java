@@ -60,15 +60,19 @@ public class HomeFragment extends Fragment {
         final JobPostFragment post = new JobPostFragment();
         final FragmentManager manager = getFragmentManager();
 
-        TextView notification = root.findViewById(R.id.home_notifications);
+        TextView jobList = root.findViewById(R.id.home_job_list_example);
         JobDao jobDao = JobLinkRoomDatabase.getDatabase(getContext()).jobDao();
         List<Job> jobs = jobDao.getAllJobs();
 
+
+
         for(Job job:jobs) {
 
-            String text = "New Job Listing: " + job.jobTitle + "\nJob Description: " + job.description;
-            notification.setText(text);
-            //TODO: Integrate employee ID
+            System.out.println(job.jobTitle);
+
+            String text = job.jobTitle + "\nJob Description: "
+                    + job.description + "\nEmployer ID: " + job.employerID;
+            jobList.setText(text);
         }
 
 
