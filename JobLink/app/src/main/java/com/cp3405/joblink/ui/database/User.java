@@ -16,12 +16,12 @@ public class User {
 //
 //    @NonNull
 //    public String getFirstName() {
-//        return this.firstName;
+//        return this.username;
 //    }
 //
 //    @NonNull
 //    public String getLastName() {
-//        return this.lastName;
+//        return this.name;
 //    }
 //
 //    @NonNull
@@ -34,11 +34,11 @@ public class User {
     public int id;
 
     @NonNull
-    @ColumnInfo(name = "first_name")
-    public String firstName;
+    @ColumnInfo(name = "username")
+    public String username;
     @NonNull
-    @ColumnInfo(name = "last_name")
-    public String lastName;
+    @ColumnInfo(name = "name")
+    public String name;
     @NonNull
     @ColumnInfo(name = "user_type")
     public String userType;
@@ -54,15 +54,19 @@ public class User {
     @NonNull
     @ColumnInfo(name = "image")
     public String image;
+    @NonNull
+    @ColumnInfo(name = "is_logged_in")
+    public boolean isLoggedIn;
 
-    public User(String firstName, String lastName, String userType, String email,
-                String password, int phoneNum, String image) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String username, String name, String userType, String email,
+                String password, int phoneNum, String image, boolean isLoggedIn) {
+        this.username = username;
+        this.name = name;
         this.userType = userType;
         this.email = email;
         this.password = password;
         this.phoneNum = phoneNum;
         this.image = image;
+        this.isLoggedIn = isLoggedIn;
     }
 }

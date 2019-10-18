@@ -1,16 +1,16 @@
 package com.cp3405.joblink.ui.login;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.cp3405.joblink.MainActivity;
 import com.cp3405.joblink.R;
 import com.cp3405.joblink.ui.database.Job;
 import com.cp3405.joblink.ui.database.JobDao;
@@ -28,11 +28,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.room.DatabaseConfiguration;
-import androidx.room.InvalidationTracker;
-import androidx.sqlite.db.SupportSQLiteOpenHelper;
-
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class LoginFragment extends Fragment {
 
@@ -57,6 +52,15 @@ public class LoginFragment extends Fragment {
         final UserDao userDao = JobLinkRoomDatabase.getDatabase(context).userDao();
         JobDao jobDao = JobLinkRoomDatabase.getDatabase(context).jobDao();
 
+        try {
+
+            User user = userDao.findUserByLogin();
+            user.isLoggedIn = false;
+            userDao.update(user);
+        } catch(Exception e){
+            Log.i("error", "No users have logged in");
+        }
+
         List<User> users = userDao.getAllUsers();
         List<Job> jobs = jobDao.getAllJobs();
       
@@ -70,10 +74,12 @@ public class LoginFragment extends Fragment {
             public void onClick(View view) {
 
                 if (username != null && password != null){
-                    User user = userDao.findUserByName(username.getText().toString());
+                    User user = userDao.findUserByUsername(username.getText().toString());
                     if (user != null) {
                         // Check database with credentials
                         if (user.password.equals(password.getText().toString())) {
+                            user.isLoggedIn = true;
+                            userDao.update(user);
                             Snackbar.make(view, String.format("Logged in as %s", user.userType), Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                             manager.beginTransaction().replace(R.id.nav_host_fragment, home,
@@ -108,5 +114,12 @@ public class LoginFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
     }
 }
