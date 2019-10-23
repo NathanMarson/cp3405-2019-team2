@@ -69,6 +69,8 @@ public class LoginFragment extends Fragment {
         final EditText username = root.findViewById(R.id.text_login_name_entry);
         final EditText password = root.findViewById(R.id.text_login_password_entry);
         Button logInButton = root.findViewById(R.id.button_login);
+
+
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

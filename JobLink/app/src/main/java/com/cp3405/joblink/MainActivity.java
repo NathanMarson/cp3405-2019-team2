@@ -29,6 +29,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Button;
 
 import java.util.List;
 
@@ -55,9 +56,6 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
-
-
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

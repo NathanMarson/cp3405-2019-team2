@@ -17,6 +17,7 @@ import com.cp3405.joblink.ui.database.Job;
 import com.cp3405.joblink.ui.database.JobDao;
 import com.cp3405.joblink.ui.database.JobLinkRoomDatabase;
 import com.cp3405.joblink.ui.database.User;
+import com.cp3405.joblink.ui.database.UserDao;
 import com.cp3405.joblink.ui.gallery.GalleryFragment;
 import com.cp3405.joblink.ui.jobPost.JobPostFragment;
 import com.cp3405.joblink.ui.jobPost.JobPostViewModel;
@@ -47,15 +48,10 @@ public class HomeFragment extends Fragment {
 //            }
 //        });
 
-        isEmployer = true;
+
 
         Button addJob = root.findViewById(R.id.jobButton);
-        if (isEmployer){
-            addJob.setVisibility(View.VISIBLE); //Bring up the user type page
-        }
-        else {
-            addJob.setVisibility(View.INVISIBLE);
-        }
+
 
         final JobPostFragment post = new JobPostFragment();
         final FragmentManager manager = getFragmentManager();
@@ -64,6 +60,21 @@ public class HomeFragment extends Fragment {
         JobDao jobDao = JobLinkRoomDatabase.getDatabase(getContext()).jobDao();
         List<Job> jobs = jobDao.getAllJobs();
 
+        UserDao userDao = JobLinkRoomDatabase.getDatabase(getContext()).userDao();
+        User user = userDao.findUserByLogin();
+
+        if (user.username.equals("Employer")){
+            isEmployer = true;
+        }else{
+            isEmployer = false;
+        }
+
+        if (isEmployer){
+            addJob.setVisibility(View.VISIBLE); //Bring up the user type page
+        }
+        else {
+            addJob.setVisibility(View.INVISIBLE);
+        }
 
 
         for(Job job:jobs) {
