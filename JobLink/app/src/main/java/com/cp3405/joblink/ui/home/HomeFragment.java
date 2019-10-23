@@ -1,6 +1,7 @@
 package com.cp3405.joblink.ui.home;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.cp3405.joblink.ui.database.JobLinkRoomDatabase;
 import com.cp3405.joblink.ui.database.User;
 import com.cp3405.joblink.ui.database.UserDao;
 import com.cp3405.joblink.ui.gallery.GalleryFragment;
+import com.cp3405.joblink.ui.job.JobFragment;
 import com.cp3405.joblink.ui.jobPost.JobPostFragment;
 import com.cp3405.joblink.ui.jobPost.JobPostViewModel;
 
@@ -54,6 +56,8 @@ public class HomeFragment extends Fragment {
 
 
         final JobPostFragment post = new JobPostFragment();
+        final JobFragment jobView = new JobFragment();
+
         final FragmentManager manager = getFragmentManager();
 
         TextView jobList = root.findViewById(R.id.home_job_list_example);
@@ -81,14 +85,21 @@ public class HomeFragment extends Fragment {
 
             System.out.println(job.jobTitle);
 
-            String text = job.jobTitle + "\nJob Description: "
-                    + job.description + "\nEmployer ID: " + job.employerID;
+            String text = job.jobTitle + "\nEmployer ID: " + job.employerID;
             jobList.setText(text);
+            jobList.setTextColor(Color.BLUE);
         }
 
 
 
 
+        jobList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                manager.beginTransaction().replace(R.id.nav_host_fragment, jobView,
+                        jobView.getTag()).commit();
+            }
+        });
 
         addJob.setOnClickListener(new View.OnClickListener() {
             @Override

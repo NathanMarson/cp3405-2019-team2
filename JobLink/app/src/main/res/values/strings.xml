@@ -38,4 +38,6 @@
     <string name="employer">Employer:</string>
     <string name="post_job">Post Job</string>
     <string name="save_changes">Save Changes</string>
+    <string name="job">JOB</string>
+    <string name="recommend">Recommend</string>
 </resources>
