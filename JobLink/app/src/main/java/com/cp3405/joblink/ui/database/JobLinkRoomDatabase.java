@@ -76,6 +76,14 @@ public abstract class JobLinkRoomDatabase extends RoomDatabase {
                     "employer@employer.com", "employer", 3675637, "image", false);
             userDao.insert(studentUser, staffUser, employerUser);
 
+            User Friend1 = new User("Friend1", "John Smith", "Friend",
+                    "student@student.com", "Friend1", 7883368, "image", false);
+            User Friend2 = new User("Friend2", "Mary Sue", "Friend",
+                    "staff@staff.com", "Friend2", 78233, "image", false);
+            User Friend3 = new User("Friend3", "Richard Johnson", "Friend",
+                    "employer@employer.com", "Friend3", 3675637, "image", false);
+            userDao.insert(Friend1, Friend2, Friend3);
+
             Job jobDefault = new Job("Default Title", "Default Description",
                     userDao.findUserByUsername("Employer").id);
             jobDao.insert(jobDefault);

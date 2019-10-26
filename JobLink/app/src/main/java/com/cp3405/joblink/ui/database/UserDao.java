@@ -24,6 +24,9 @@ public interface UserDao {
     @Query("SELECT * FROM users WHERE is_logged_in = 1 LIMIT 1")
     User findUserByLogin();
 
+    @Query("SELECT name FROM users WHERE user_type = :userType")
+    List<String> getUserType(String userType);
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     long insert(User users);
 
