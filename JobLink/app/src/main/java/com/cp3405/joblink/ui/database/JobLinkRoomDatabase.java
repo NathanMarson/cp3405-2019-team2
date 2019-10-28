@@ -4,6 +4,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
@@ -66,14 +69,16 @@ public abstract class JobLinkRoomDatabase extends RoomDatabase {
         }
         @Override
         protected Void doInBackground(Void... voids) {
+
+
 //            userDao.deleteAll();
 //            jobDao.deleteAll();
             User studentUser = new User("Student", "Default", "Student",
                     "student@student.com", "student", 7883368, "image", false);
             User staffUser = new User("Staff", "Default", "Staff",
-                    "staff@staff.com", "staff", 78233, "image", false);
+                    "staff@staff.com", "staff", 78233, "image", false );
             User employerUser = new User("Employer", "Default", "Employer",
-                    "employer@employer.com", "employer", 3675637, "image", false);
+                    "employer@employer.com", "employer", 3675637, "image", false );
             userDao.insert(studentUser, staffUser, employerUser);
 
             Job jobDefault = new Job("Default Title", "Default Description",

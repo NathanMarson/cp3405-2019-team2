@@ -1,5 +1,7 @@
 package com.cp3405.joblink.ui.database;
 
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -58,6 +60,7 @@ public class User {
     @ColumnInfo(name = "is_logged_in")
     public boolean isLoggedIn;
 
+
     public User(String username, String name, String userType, String email,
                 String password, int phoneNum, String image, boolean isLoggedIn) {
         this.username = username;
@@ -68,5 +71,6 @@ public class User {
         this.phoneNum = phoneNum;
         this.image = image;
         this.isLoggedIn = isLoggedIn;
+
     }
 }

@@ -40,4 +40,6 @@
     <string name="save_changes">Save Changes</string>
     <string name="job">JOB</string>
     <string name="recommend">Recommend</string>
+    <string name="select_a_student">Select a student</string>
+    <string name="search">Search</string>
 </resources>
