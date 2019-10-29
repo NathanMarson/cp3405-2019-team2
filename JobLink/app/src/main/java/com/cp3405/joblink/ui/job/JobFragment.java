@@ -1,6 +1,7 @@
 package com.cp3405.joblink.ui.job;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import com.cp3405.joblink.ui.database.JobDao;
 import com.cp3405.joblink.ui.database.JobLinkRoomDatabase;
 import com.cp3405.joblink.ui.database.User;
 import com.cp3405.joblink.ui.database.UserDao;
+import com.cp3405.joblink.ui.home.HomeFragment;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -27,9 +30,15 @@ public class JobFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         final View root = inflater.inflate(R.layout.fragment_job, container, false);
 
+        Bundle bundle = getArguments();
+
+        String selectedJobTitle = bundle.getString("Job Title");
+
 
         JobDao jobDao = JobLinkRoomDatabase.getDatabase(getContext()).jobDao();
         final List<Job> jobs = jobDao.getAllJobs();
+
+        final Job currentJob = jobDao.findJobByTitle(selectedJobTitle);
 
         final TextView name = root.findViewById(R.id.jobName);
         final TextView id = root.findViewById(R.id.jobID);
@@ -44,6 +53,20 @@ public class JobFragment extends Fragment {
         final EditText searchUser = root.findViewById(R.id.searchUser);
         final Button searchButton = root.findViewById(R.id.searchButton);
         final TextView searchedUser = root.findViewById(R.id.searchedUser);
+
+        final String title = currentJob.jobTitle;
+        String jobID = "Job ID: " + currentJob.jobID;
+        String descriptionTitle = "Job Description:";
+        String description = currentJob.description;
+        String employer = "Posted By: Employer with ID  " + currentJob.employerID;
+        name.setText(title);
+        id.setText(jobID);
+        descriptTitle.setText(descriptionTitle);
+        descript.setText(description);
+        jobId.setText(employer);
+
+
+
 
 
         if (user.username.equals("Staff")){
@@ -65,14 +88,32 @@ public class JobFragment extends Fragment {
 
 
 
+
+
+
+
+
+
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 searchedUser.setVisibility(View.VISIBLE);
+                final User selectedUser = userDao.findUserByUsername(searchUser.getText().toString());
 
                 try{
                     String test = userDao.findUserByUsername(searchUser.getText().toString()).username;
-                    searchedUser.setText(searchUser.getText());
+                    searchedUser.setText(test);
+                    searchedUser.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            selectedUser.recommended_jobs = selectedUser.recommended_jobs + ((name.getText().toString()) + ",");
+                            Log.i("database", selectedUser.recommended_jobs);
+                            userDao.update(selectedUser);
+                            System.out.println(selectedUser.recommended_jobs);
+                            Snackbar.make(view, "You recommended " + selectedUser.username + " for this job.", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null).show();
+                        }
+                    });
                 }catch (NullPointerException e){
                     searchedUser.setText(text);
                 }
@@ -82,21 +123,6 @@ public class JobFragment extends Fragment {
 
 
 
-        for(Job job:jobs) {
-
-            System.out.println(job.jobTitle);
-
-            String title = job.jobTitle;
-            String jobID = "Job ID: " + job.jobID;
-            String descriptionTitle = "Job Description:";
-            String description = job.description;
-            String employer = "Posted By: Employer with ID  " + job.employerID;
-            name.setText(title);
-            id.setText(jobID);
-            descriptTitle.setText(descriptionTitle);
-            descript.setText(description);
-            jobId.setText(employer);
-        }
 
         return root;
     }

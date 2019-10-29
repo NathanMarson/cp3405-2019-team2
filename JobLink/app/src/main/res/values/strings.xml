@@ -42,4 +42,5 @@
     <string name="recommend">Recommend</string>
     <string name="select_a_student">Select a student</string>
     <string name="search">Search</string>
+    <string name="no_new_notifications">No new notifications</string>
 </resources>

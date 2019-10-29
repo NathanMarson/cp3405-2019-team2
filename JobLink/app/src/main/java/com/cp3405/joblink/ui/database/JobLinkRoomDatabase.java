@@ -3,6 +3,7 @@ package com.cp3405.joblink.ui.database;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public abstract class JobLinkRoomDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract JobDao jobDao();
 
-//    private static volatile JobLinkRoomDatabase jobLinkRoomDatabase;
+    //private static volatile JobLinkRoomDatabase jobLinkRoomDatabase;
 
     public static JobLinkRoomDatabase getDatabase(final Context context) {
 //        context.deleteDatabase(DB_NAME); // Reset Database //
@@ -67,18 +68,22 @@ public abstract class JobLinkRoomDatabase extends RoomDatabase {
             userDao = jobLinkRoomDatabase.userDao();
             jobDao = jobLinkRoomDatabase.jobDao();
         }
+
+
         @Override
         protected Void doInBackground(Void... voids) {
+
+
 
 
 //            userDao.deleteAll();
 //            jobDao.deleteAll();
             User studentUser = new User("Student", "Default", "Student",
-                    "student@student.com", "student", 7883368, "image", false);
+                    "student@student.com", "student", 7883368, "image", false, "");
             User staffUser = new User("Staff", "Default", "Staff",
-                    "staff@staff.com", "staff", 78233, "image", false );
+                    "staff@staff.com", "staff", 78233, "image", false, "" );
             User employerUser = new User("Employer", "Default", "Employer",
-                    "employer@employer.com", "employer", 3675637, "image", false );
+                    "employer@employer.com", "employer", 3675637, "image", false, "");
             userDao.insert(studentUser, staffUser, employerUser);
 
             Job jobDefault = new Job("Default Title", "Default Description",
