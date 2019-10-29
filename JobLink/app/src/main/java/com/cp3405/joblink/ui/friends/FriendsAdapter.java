@@ -18,6 +18,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
+    // https://stackoverflow.com/a/40584425
     // data is passed into the constructor
     FriendsAdapter(Context context, List<String> data) {
         this.mInflater = LayoutInflater.from(context);

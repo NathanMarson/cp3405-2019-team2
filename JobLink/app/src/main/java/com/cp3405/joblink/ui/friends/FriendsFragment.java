@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,24 +29,17 @@ public class FriendsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_friends, container, false);
 
-//        RecyclerView recyclerView = findViewById(R.id.rvAnimals);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        adapter = new FriendAdapter(this, animalNames);
-//        adapter.setClickListener(this);
-//        recyclerView.setAdapter(adapter);
-
         friends = root.findViewById(R.id.friends_recycler);
-//        friends.setHasFixedSize(true);
         friends.setLayoutManager(new LinearLayoutManager(root.getContext()));
-
-        // specify an adapter (see also next example)
         adapter = new FriendsAdapter(root.getContext(), getFriends());
         friends.setAdapter(adapter);
+        friends.addItemDecoration(new DividerItemDecoration(root.getContext(), DividerItemDecoration.VERTICAL));
+        
         return root;
     }
 
     private List<String> getFriends() {
         userDao = JobLinkRoomDatabase.getDatabase(context).userDao();
-        return userDao.getUserType("Friends");
+        return userDao.getUserType("Friend");
     }
 }
