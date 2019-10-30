@@ -21,6 +21,9 @@ public interface JobDao {
     @Query("SELECT * FROM jobs WHERE job_title = :title LIMIT 1")
     Job findJobByTitle(String title);
 
+    @Query("SELECT * FROM jobs WHERE job_title LIKE :search OR description LIKE :search")
+    List<Job> findJobsBySearch(String search);
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     long insert(Job jobs);
 
