@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_profile" />
 
     <fragment
+        android:id="@+id/nav_friends"
+        android:name="com.cp3405.joblink.ui.friends.FriendsFragment"
+        android:label="@string/menu_friends"
+        tools:layout="@layout/fragment_friends" />
+
+    <fragment
         android:id="@+id/nav_gallery"
         android:name="com.cp3405.joblink.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
@@ -64,5 +70,11 @@
         android:name="com.cp3405.joblink.ui.job.JobFragment"
         android:label="View Job"
         tools:layout="@layout/fragment_job" />
+  
+  <fragment
+        android:id="@+id/nav_search"
+        android:name="com.cp3405.joblink.ui.search.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search" />
 
 </navigation>
