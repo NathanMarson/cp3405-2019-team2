@@ -21,7 +21,6 @@ import com.cp3405.joblink.ui.database.JobDao;
 import com.cp3405.joblink.ui.database.JobLinkRoomDatabase;
 import com.cp3405.joblink.ui.database.UserDao;
 import com.cp3405.joblink.ui.home.HomeFragment;
-import com.cp3405.joblink.ui.jobPost.JobPostViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 public class JobPostFragment extends Fragment {
