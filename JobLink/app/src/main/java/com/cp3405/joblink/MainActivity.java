@@ -81,8 +81,6 @@ public class MainActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
             }
         });
-
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -218,6 +216,8 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onSupportNavigateUp() {

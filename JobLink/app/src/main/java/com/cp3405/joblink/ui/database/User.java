@@ -1,10 +1,16 @@
 package com.cp3405.joblink.ui.database;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
 
 @Entity(tableName = "users", indices = {@Index(value = "username", unique = true)})
 public class User {
@@ -57,9 +63,13 @@ public class User {
     @NonNull
     @ColumnInfo(name = "is_logged_in")
     public boolean isLoggedIn;
+    @NonNull
+    @ColumnInfo(name = "recommended_jobs")
+    public String recommended_jobs;
+
 
     public User(String username, String name, String userType, String email,
-                String password, int phoneNum, String image, boolean isLoggedIn) {
+                String password, int phoneNum, String image, boolean isLoggedIn, String recommended_jobs) {
         this.username = username;
         this.name = name;
         this.userType = userType;
@@ -68,5 +78,8 @@ public class User {
         this.phoneNum = phoneNum;
         this.image = image;
         this.isLoggedIn = isLoggedIn;
+        this.recommended_jobs = recommended_jobs;
+
     }
 }
+

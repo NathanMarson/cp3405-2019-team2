@@ -66,6 +66,12 @@
         tools:layout="@layout/fragment_jobpost" />
 
     <fragment
+        android:id="@+id/nav_job"
+        android:name="com.cp3405.joblink.ui.job.JobFragment"
+        android:label="View Job"
+        tools:layout="@layout/fragment_job" />
+  
+  <fragment
         android:id="@+id/nav_search"
         android:name="com.cp3405.joblink.ui.search.SearchFragment"
         android:label="Search"

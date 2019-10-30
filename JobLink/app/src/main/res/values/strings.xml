@@ -38,6 +38,10 @@
     <string name="employer">Employer:</string>
     <string name="post_job">Post Job</string>
     <string name="save_changes">Save Changes</string>
-    <string name="menu_friends">Friends</string>
+    <string name="job">JOB</string>
+    <string name="recommend">Recommend</string>
+    <string name="select_a_student">Select a student</string>
     <string name="search">Search</string>
+    <string name="no_new_notifications">No new notifications</string>
+    <string name="menu_friends">Friends</string>
 </resources>
