@@ -120,7 +120,7 @@ public class HomeFragment extends Fragment {
                     System.out.println(selectedJob[0].jobTitle);
 
                     Bundle bundle = new Bundle();
-                    bundle.putString("Job Title", selectedJob[0].jobTitle);
+                    bundle.putInt("jobID", selectedJob[0].jobID);
                     jobView.setArguments(bundle);
 
                     manager.beginTransaction().replace(R.id.nav_host_fragment, jobView,
@@ -144,7 +144,7 @@ public class HomeFragment extends Fragment {
                 selectedJob[0] = jobDao.findJobByTitle(list2.getItemAtPosition(position).toString());
 
                 Bundle bundle = new Bundle();
-                bundle.putString("Job Title", selectedJob[0].jobTitle);
+                bundle.putInt("jobID", selectedJob[0].jobID);
                 jobView.setArguments(bundle);
 
                 manager.beginTransaction().replace(R.id.nav_host_fragment, jobView,

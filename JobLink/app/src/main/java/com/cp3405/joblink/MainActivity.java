@@ -39,6 +39,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 FragmentManager manager = getSupportFragmentManager();
-                int count = manager.getBackStackEntryCount();
+//                int count = manager.getBackStackEntryCount();
 //                if (manager.getBackStackEntryCount() > 0){
 //                    manager.popBackStack();
 //                }
@@ -96,44 +97,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         jobViewModel = ViewModelProviders.of(this).get(JobViewModel.class);
-
-//        database = new JobLinkRoomDatabase() {
-//            @Override
-//            public UserDao userDao() {
-//                return null;
-//            }
-//
-//            @Override
-//            public JobDao jobDao() {
-//                return null;
-//            }
-//
-//            @NonNull
-//            @Override
-//            protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration config) {
-//                return null;
-//            }
-//
-//            @NonNull
-//            @Override
-//            protected InvalidationTracker createInvalidationTracker() {
-//                return null;
-//            }
-//
-//            @Override
-//            public void clearAllTables() {
-//                clearDb();
-//            }
-//        };
-
-//        System.out.println(database.userDao().isNull());
-
         final UserDao userDao = JobLinkRoomDatabase.getDatabase(context).userDao();
         JobDao jobDao = JobLinkRoomDatabase.getDatabase(context).jobDao();
-//
-////        userDao.deleteAll();
-//
-//        System.out.println(userDao.getAllUsers());
+
         List<User> users = userDao.getAllUsers();
         List<Job> jobs = jobDao.getAllJobs();
         for (User user : users) {
@@ -225,4 +191,11 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+//    @Override
+//    public void onBackPressed()
+//    {
+//        super.onBackPressed();
+//        Toast.makeText(getApplication(),"A",Toast.LENGTH_SHORT).show();
+//    }
 }

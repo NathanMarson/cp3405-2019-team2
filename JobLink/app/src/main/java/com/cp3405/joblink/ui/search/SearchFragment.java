@@ -19,6 +19,8 @@ import com.cp3405.joblink.ui.database.JobDao;
 import com.cp3405.joblink.ui.database.JobLinkRoomDatabase;
 import com.cp3405.joblink.ui.database.User;
 import com.cp3405.joblink.ui.database.UserDao;
+import com.cp3405.joblink.ui.job.JobFragment;
+import com.cp3405.joblink.ui.profile.ProfileFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.cp3405.joblink.ui.home.HomeFragment;
 import com.cp3405.joblink.ui.search.SearchFragment;
@@ -49,6 +51,10 @@ public class SearchFragment extends Fragment {
     private EditText searchBar;
     private TableLayout searchViewTableLayout;
 
+    private JobFragment jobView;
+    private ProfileFragment profileView;
+    private FragmentManager manager;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         searchViewModel =
@@ -65,8 +71,9 @@ public class SearchFragment extends Fragment {
 
         final SearchFragment search = new SearchFragment();
         final HomeFragment home = new HomeFragment();
-        final FragmentManager manager = getFragmentManager();
-//        final JobFragment jobView = new JobFragment();
+        manager = getFragmentManager();
+        jobView = new JobFragment();
+        profileView = new ProfileFragment();
 
         jobDao = JobLinkRoomDatabase.getDatabase(getContext()).jobDao();
         userDao = JobLinkRoomDatabase.getDatabase(getContext()).userDao();
@@ -86,60 +93,8 @@ public class SearchFragment extends Fragment {
 
                 populateSearchView();
 
-//                if (username != null && password != null){
-//                User user = userDao.findUserByUsername(username.getText().toString());
-//                if (user != null) {
-//                    // Check database with credentials
-//                    if (user.password.equals(password.getText().toString())) {
-//                        user.isLoggedIn = true;
-//                        userDao.update(user);
-//                        Snackbar.make(view, String.format("Logged in as %s", user.userType), Snackbar.LENGTH_LONG)
-//                                .setAction("Action", null).show();
-//                        manager.beginTransaction().replace(R.id.nav_host_fragment, home,
-//                                home.getTag()).commit();
-//                    } else {
-//                        Snackbar.make(view, "Incorrect username or password", Snackbar.LENGTH_LONG)
-//                                .setAction("Action", null).show();
-//                    }
-//                } // Add new user if username is not recognised
-//                }
-
-//                if (username.getText().toString().toLowerCase().equals("employer")){
-//                    //Check database with credentials
-//                    Snackbar.make(view, "Logged in as an employer", Snackbar.LENGTH_LONG)
-//                            .setAction("Action", null).show();
-//                    manager.beginTransaction().replace(R.id.nav_host_fragment, home,
-//                            home.getTag()).commit();
-//                }
-//                else {
-//                    Snackbar.make(view, "Incorrect username or password", Snackbar.LENGTH_LONG)
-//                            .setAction("Action", null).show();
-//
-//                }
-
             }
         });
-
-
-
-
-
-//        Button postButton = root.findViewById(R.id.postButton);
-//        postButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Snackbar.make(view, "Job Posted", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//                manager.beginTransaction().replace(R.id.nav_host_fragment, home,
-//                        home.getTag()).commit();
-//                Job example = new Job(jobTitle.getText().toString(), jobDes.getText().toString(),
-//                        userDao.findUserByUsername("Employer").id);
-//
-//                jobDao.insert(example);
-//            }
-//        });
-
 
         populateSearchView();
 
@@ -169,7 +124,7 @@ public class SearchFragment extends Fragment {
 
         List<User> searchedUsers = userDao.findUsersBySearch(search);
 
-        for(User user:searchedUsers) {
+        for(final User user:searchedUsers) {
 
             String text = user.name + "\nUser Type: " + user.userType + "\nEmail: " + user.email
                     + "\nPhone No.: " + user.phoneNum;
@@ -225,6 +180,29 @@ public class SearchFragment extends Fragment {
             searchViewTableLayout.addView(tr, new TableLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            tr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int userID = user.id;
+
+
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("userID", userID);
+                    profileView.setArguments(bundle);
+
+                    FragmentTransaction transaction = manager.beginTransaction();
+
+                    transaction.add(R.id.nav_host_fragment, profileView,
+                            profileView.getTag());
+                    transaction.commit();
+                    transaction.addToBackStack(null);
+
+//                    manager.beginTransaction().replace(R.id.nav_host_fragment, profileView,
+//                            profileView.getTag()).commit();
+                }
+            });
+
             count++;
         }
     }
@@ -333,24 +311,28 @@ public class SearchFragment extends Fragment {
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
 
+            tr.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    int jobID = job.jobID;
 
 
-//            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, recommend);
-//            tr.setAdapter(arrayAdapter);
-//            tr.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    int jobID = job.jobID;
-//
-//
-//                    Bundle bundle = new Bundle();
-//                    bundle.putInt("jobID", jobID);
-//                    jobView.setArguments(bundle);
-//
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("jobID", jobID);
+                    jobView.setArguments(bundle);
+
+                    FragmentTransaction transaction = manager.beginTransaction();
+
+                    transaction.add(R.id.nav_host_fragment, jobView,
+                            jobView.getTag());
+                    transaction.commit();
+                    transaction.addToBackStack(null);
+
 //                    manager.beginTransaction().replace(R.id.nav_host_fragment, jobView,
 //                            jobView.getTag()).commit();
-//                }
-//            });
+                }
+            });
 
             count++;
         }
