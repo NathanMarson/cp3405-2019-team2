@@ -18,6 +18,12 @@
         tools:layout="@layout/fragment_profile" />
 
     <fragment
+        android:id="@+id/nav_friends"
+        android:name="com.cp3405.joblink.ui.friends.FriendsFragment"
+        android:label="@string/menu_friends"
+        tools:layout="@layout/fragment_friends" />
+
+    <fragment
         android:id="@+id/nav_gallery"
         android:name="com.cp3405.joblink.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
