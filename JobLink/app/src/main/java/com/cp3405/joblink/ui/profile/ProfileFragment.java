@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigator;
 
 import com.cp3405.joblink.R;
 import com.cp3405.joblink.ui.database.User;
@@ -31,16 +32,24 @@ public class ProfileFragment extends Fragment {
     private User user;
     private UserDao userDao;
     private Button saveChanges;
+    private boolean isCurrentUser;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        userDao = JobLinkRoomDatabase.getDatabase(context).userDao();
-//        final FragmentManager manager = getFragmentManager();
-//        final LoginFragment login = new LoginFragment();
+        isCurrentUser = false;
 
-        user = userDao.findUserByLogin();
+        userDao = JobLinkRoomDatabase.getDatabase(context).userDao();
+
+        Bundle bundle = getArguments();
+
+        if (bundle != null) {
+            int selectedUserID = bundle.getInt("userID");
+            user = userDao.findUserById(selectedUserID);
+        } else {
+            user = userDao.findUserByLogin();
+        }
 //        if(user == null){
 //            Snackbar.make(root, "Please log in", Snackbar.LENGTH_LONG)
 //                    .setAction("Action", null).show();
@@ -49,6 +58,28 @@ public class ProfileFragment extends Fragment {
 //
 //        }
 
+        getUserDetails(root);
+
+        saveChanges = root.findViewById(R.id.profile_save_changes);
+        saveChanges.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user.name = name.getText().toString();
+                Log.i("database", user.name);
+                user.email = email.getText().toString();
+                Log.i("database", user.email);
+                user.phoneNum = Integer.valueOf(phone.getText().toString());
+                Log.i("database", String.valueOf(user.phoneNum));
+                userDao.update(user);
+                Snackbar.make(getView(), "Changes Saved", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        return root;
+    }
+
+    private void getUserDetails(View root) {
         name = root.findViewById(R.id.profile_name);
         name.setText(user.name);
         name.setOnClickListener(new View.OnClickListener() {
@@ -75,24 +106,6 @@ public class ProfileFragment extends Fragment {
                 numberEdit(phone);
             }
         });
-
-        saveChanges = root.findViewById(R.id.profile_save_changes);
-        saveChanges.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                user.name = name.getText().toString();
-                Log.i("database", user.name);
-                user.email = email.getText().toString();
-                Log.i("database", user.email);
-                user.phoneNum = Integer.valueOf(phone.getText().toString());
-                Log.i("database", String.valueOf(user.phoneNum));
-                userDao.update(user);
-                Snackbar.make(getView(), "Changes Saved", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        return root;
     }
 
     private void textEdit(final TextView textView){

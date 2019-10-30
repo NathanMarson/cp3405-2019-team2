@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.cp3405.joblink.ui.profile.ProfileFragment"
-    tools:ignore="UseCompoundDrawables">
+    tools:ignore="UseCompoundDrawables"
+    android:background="?android:windowBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
